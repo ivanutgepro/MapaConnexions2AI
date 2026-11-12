@@ -53,9 +53,10 @@
   .toast.on{opacity:1;transform:none}
   .toast.collab{background:var(--pink);color:#fff}
   text{font-family:Outfit,sans-serif;fill:#fff;pointer-events:none;font-weight:500;paint-order:stroke;stroke:rgba(42,10,99,.55);stroke-width:3px}
-  .madeby{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:-6px}
+  .toprow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .madeby{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
   .madeby span{font-size:12px;color:var(--soft)}
-  .madeby img{height:20px}
+  .madeby img{height:22px}
   #status{position:absolute;right:12px;bottom:8px;font-size:11px;color:var(--soft)}
 </style>
 </head>
@@ -81,7 +82,7 @@
     <div id="status"></div>
   </div>
   <aside>
-    <img class="logo" src="/static/tarragona-impulsa.png" alt="Tarragona Impulsa">
+    <div class="toprow"><img class="logo" src="/static/tarragona-impulsa.png" alt="Tarragona Impulsa"><div class="madeby"><span>Eina creada per</span><img src="/static/ivanutge.png" alt="ivanutge.com"></div></div>
     <div class="kpis">
       <div class="kpi"><div class="v" id="k-p">0</div><div class="l">persones al mapa</div></div>
       <div class="kpi"><div class="v" id="k-c">0</div><div class="l">connexions</div></div>
@@ -91,7 +92,6 @@
     <div class="sec">Comunitats</div>
     <div class="legend" id="legend"></div>
     <div class="join"><img src="/static/qr-mapa.png" alt="QR del mapa de connexions"><div><b>Entra al mapa</b><span>Escaneja amb la càmera del mòbil</span><br><span id="url"></span></div></div>
-    <div class="madeby"><span>Eina creada per</span><img src="/static/ivanutge.png" alt="ivanutge.com"></div>
   </aside>
 </div>
 <script src="/vendor/d3.min.js"></script>
