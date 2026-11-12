@@ -33,7 +33,7 @@
   .legend .dot{width:12px;height:12px}
   .legend .c{margin-left:auto;color:var(--soft);font-variant-numeric:tabular-nums}
   .join{margin-top:auto;display:flex;gap:16px;align-items:center;border:1.5px solid var(--stroke);border-radius:999px 24px 24px 999px;padding:12px 18px 12px 12px}
-  .join img{width:118px;height:118px;background:#fff;border-radius:50%;padding:16px}
+  .join img{width:124px;height:124px;background:#fff;border-radius:14px;padding:0}
   .join b{font-weight:800;font-size:20px;display:block;margin-bottom:4px}
   .join span{color:var(--soft);font-size:14px;word-break:break-all}
   .sec{font-weight:700;font-size:15px;color:var(--soft)}
@@ -53,6 +53,9 @@
   .toast.on{opacity:1;transform:none}
   .toast.collab{background:var(--pink);color:#fff}
   text{font-family:Outfit,sans-serif;fill:#fff;pointer-events:none;font-weight:500;paint-order:stroke;stroke:rgba(42,10,99,.55);stroke-width:3px}
+  .madeby{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:-6px}
+  .madeby span{font-size:12px;color:var(--soft)}
+  .madeby img{height:20px}
   #status{position:absolute;right:12px;bottom:8px;font-size:11px;color:var(--soft)}
 </style>
 </head>
@@ -87,7 +90,8 @@
     </div>
     <div class="sec">Comunitats</div>
     <div class="legend" id="legend"></div>
-    <div class="join"><img src="/qr/registre.svg" alt="QR de registre"><div><b>Entra al mapa</b><span>Escaneja amb la càmera del mòbil</span><br><span id="url"></span></div></div>
+    <div class="join"><img src="/static/qr-mapa.png" alt="QR del mapa de connexions"><div><b>Entra al mapa</b><span>Escaneja amb la càmera del mòbil</span><br><span id="url"></span></div></div>
+    <div class="madeby"><span>Eina creada per</span><img src="/static/ivanutge.png" alt="ivanutge.com"></div>
   </aside>
 </div>
 <script src="/vendor/d3.min.js"></script>

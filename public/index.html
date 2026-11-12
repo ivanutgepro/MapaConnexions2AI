@@ -56,7 +56,12 @@
         <form class="manual" id="fm"><input type="text" id="codi" maxlength="4" autocomplete="off" autocapitalize="characters" placeholder="ABCD"><button class="btn btn-primary" type="submit">Anar</button></form>
         <div class="err" id="merr"></div>
       </div>
-      <p class="hint">Si tanques el navegador, pots tornar al teu QR amb el teu enllaç personal: <a id="mylink" href="#">copiar l'enllaç</a></p>
+      <div class="save">
+        <div class="t"><span>🔗</span>Guarda el teu enllaç personal</div>
+        <p>Si tanques el navegador o canvies de mòbil, amb aquest enllaç tornes al teu QR i a les teves connexions.</p>
+        <button class="btn" id="mylink" type="button">Copiar el meu enllaç</button>
+        <div class="lnk" id="mylinktxt"></div>
+      </div>
     </div>
 
     <div id="t-cx" class="hidden">
@@ -70,7 +75,7 @@
         <div class="it"><b>17:30</b><span>Obrim portes</span></div>
         <div class="it"><b>18:00</b><span>Acollida (mapa de connexions amb el mòbil QR)</span></div>
         <div class="it"><b>18:10</b><span><em>Benvinguda</em> institucional</span></div>
-        <div class="it box"><b>18:15</b><span><em>Pòdcast</em> amb cadira buida amb <em>Karim Casadó</em> (CEO i cofundador de Somni Game Studios) i <em>Maria Larroy</em> (cofundadora de Pas a Pas Comunicació i METSData)</span></div>
+        <div class="it box"><b>18:15</b><span><em>Pòdcast</em> amb cadira buida amb <em>Karim Casadó</em> (CEO i cofundador de Somni Game Studios) i <em>Maria Larroy</em> (cofundadora de Pas a Pas Comunicació i METSData)<br>Amb <em>Ivan Utgé</em> (dinamitzador del podcast)</span></div>
         <div class="it"><b>19:00</b><span>Reconeixement premis programes TESS, Tgn Start Up i Explorer</span></div>
         <div class="it"><b>19:10</b><span><em>Pitch de xarxes</em> (1 minut per xarxa: qui som i en quina illa ens trobareu)</span></div>
         <div class="it box"><b>19:20</b><span><em>Illes temàtiques</em> (per afavorir les connexions entre els assistents)
@@ -83,6 +88,7 @@
   </section>
 
   <section id="closed" class="hidden"><h1>El registre està tancat</h1><p class="lead">Gràcies per venir a l'Afterwork Impulsa't!</p></section>
+  <a class="credit" href="https://ivanutge.com" target="_blank" rel="noopener"><span>Eina creada per</span><img src="/static/ivanutge.png" alt="Ivan Utgé · ivanutge.com"></a>
 </div>
 <script src="/static/common.js"></script>
 <script>
@@ -112,10 +118,15 @@
   $('#mydot').style.background = x.color;
   $('#myqr').src = '/qr/' + me.code + '.svg';
   $('#mycode').textContent = me.code;
+  $('#mylinktxt').textContent = me.link;
   $('#mylink').addEventListener('click', async e => {
-    e.preventDefault();
-    try { await navigator.clipboard.writeText(me.link); e.target.textContent = 'copiat ✓'; }
-    catch { prompt('Guarda aquest enllaç:', me.link); }
+    const b = e.currentTarget;
+    try { await navigator.clipboard.writeText(me.link); b.textContent = 'Enllaç copiat ✓ Desa\'l a les notes o envia-te\'l'; }
+    catch {
+      if (navigator.share) { try { await navigator.share({ title: 'El meu QR · Afterwork Impulsa\'t', url: me.link }); return; } catch {} }
+      const r = document.createRange(); r.selectNodeContents($('#mylinktxt')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      b.textContent = 'Enllaç seleccionat: copia\'l a mà';
+    }
   });
   show('app');
   document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
